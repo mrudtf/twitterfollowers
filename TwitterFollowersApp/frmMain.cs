@@ -29,6 +29,10 @@ namespace TwitterFollowersApp {
                 this.c = new Config();
                 this.txtConsumerKey.Text = c.conf.consumerKey;
                 this.txtConsumerSecret.Text = c.conf.consumerSecret;
+                this.lblLastCheck.Text = c.conf.lastCheck;
+                this.lstCurrent.Items.Clear();
+                this.lstUnfollows.Items.Clear();
+                this.lstNew.Items.Clear();                
             }
             catch (FileNotFoundException exception)
             {
@@ -42,6 +46,13 @@ namespace TwitterFollowersApp {
            c.conf.consumerKey = txtConsumerKey.Text;
            c.conf.consumerSecret = txtConsumerSecret.Text;
            c.saveConfig();                         
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.c.conf.lastCheck = DateTime.Now.ToString();
+            this.c.saveConfig();
+            this.Dispose();
         }
     }
 }
